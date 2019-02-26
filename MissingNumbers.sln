@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissingNumbers", "MissingNu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{F197D9E2-C058-4236-BCE0-55015BD7246E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "Helper\Helper.csproj", "{13871CBB-6DBA-459A-9160-673C0ED949F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F197D9E2-C058-4236-BCE0-55015BD7246E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F197D9E2-C058-4236-BCE0-55015BD7246E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F197D9E2-C058-4236-BCE0-55015BD7246E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13871CBB-6DBA-459A-9160-673C0ED949F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13871CBB-6DBA-459A-9160-673C0ED949F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13871CBB-6DBA-459A-9160-673C0ED949F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13871CBB-6DBA-459A-9160-673C0ED949F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
