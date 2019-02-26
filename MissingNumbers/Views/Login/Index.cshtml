@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Autenticación";
+}
+<div id="login">
+    <h1 class="page-header text-center">Autenticación en el sistema</h1>
+    @using (Html.BeginForm("Acceder", "Login", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label>Nombre de Usuario</label>
+            <input type="text" name="NombreUsuario" class="form-control" placeholder="Ingrese su usuario" />
+        </div>
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" name="Contrasena" class="form-control" placeholder="Ingrese su contraseña" />
+        </div>
+        <div class="form-group">
+            <a class="nav-link" href="~/usuario/crud">Registrarse</a>
+        </div>
+
+        <button data-ajax="true" type="submit" class="btn btn-primary float-right">Ingresar</button>
+    }
+</div>

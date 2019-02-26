@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Helper;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Helper;
 
 namespace Model.BussinesLogic
 {
@@ -33,7 +33,7 @@ namespace Model.BussinesLogic
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
