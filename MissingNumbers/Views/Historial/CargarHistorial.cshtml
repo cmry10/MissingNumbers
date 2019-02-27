@@ -1,0 +1,56 @@
+﻿@model Model.ViewModels.IndexViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/assets/js/jquery-3.3.1.min.js"></script>
+<h4>Filtrar</h4>
+@using (Html.BeginForm("CargarHistorial", "Historial", FormMethod.Get))
+{
+    <label for="fechaInicial">Fecha Inicial</label>
+    <input type="date" name="fechaInicial" id="fechaInicial" />
+    <label for="fechaFinal">Fecha Final</label>
+    <input type="date" name="fechaFinal" id="fechaFinal" />
+    <input type="submit" value="Filtrar" class="btn btn-info btn-sm" />
+    <a class="btn btn-success btn-sm" href="~/listas/Index">Insertar Listas</a>
+}
+<h4>Resultados</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Lista Perdidos</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var historial in Model.ListaHistorial)
+        {
+            <tr>
+                <th>@historial.Fecha</th>
+                <th>@historial.listaPerdidos</th>
+                <th>
+                    <input type="hidden" id="idDetalle" name="idDetalle" />
+                    <a class="btn btn-info btn-sm" id="btnVerDetalle" data-target="modalVerDetalle" data-id="@historial.Id" data-toggle="modalVerDetalle">Ver</a>
+                    <a onclick="return confirm('¿Desea eliminar este registro?');" class="btn btn-danger btn-sm" href="~/historial/eliminar/@historial.Id">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+@*<div class="modal fade" id="modalVerDetalle" role="dialog" data-url="@Url.Action("Ver","Historial", new { id = "" })"></div>*@
+<div class="modal fade" id="modalVerDetalle" role="dialog" ></div>
+@{Html.RenderPartial("_paginador", Model);}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.btn-info').click(function () {
+            var _id=$(this).data('id');
+            var _url = '@Url.Action("Ver","Historial")/'+_id;
+            $.get(_url, function (data) {
+                $('#modalVerDetalle').html(data);
+                $('#modalVerDetalle').modal('show');
+            });
+        });
+    });
+</script>
+

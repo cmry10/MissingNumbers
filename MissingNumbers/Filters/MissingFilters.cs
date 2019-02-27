@@ -33,8 +33,8 @@ namespace MissingNumbers.Filters
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {
-                    controller = "Home",
-                    action = "Index"
+                    controller = "Historial",
+                    action = "CargarHistorial"
                 }));
             }
         }

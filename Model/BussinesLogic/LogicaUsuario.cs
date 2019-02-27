@@ -29,7 +29,7 @@ namespace Model.BussinesLogic
                     }
                     else
                     {
-                        rm.SetResponse(false, "Correo o contraseña Incorrecta.");
+                        rm.SetResponse(false, "Nombre de usario o contraseña Incorrecta.");
                     }
                 }
             }
@@ -54,7 +54,7 @@ namespace Model.BussinesLogic
                                          .SingleOrDefault();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

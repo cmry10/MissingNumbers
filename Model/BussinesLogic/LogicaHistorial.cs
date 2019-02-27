@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Model.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Web.Routing;
 
 namespace Model.BussinesLogic
 {
@@ -27,47 +31,43 @@ namespace Model.BussinesLogic
             return historial;
         }
 
-        public AnexGRIDResponde Listar(AnexGRID grid)
+        public IndexViewModel Listar(DateTime? fechaInicial, DateTime? fechaFinal)
         {
             try
             {
+                int pagina = 1;
+                var cantidadRegistrosPorPagina = 10; // parámetro
+                var listaHistorial = new List<Historial>();
+                int totalDeRegistros = 0;
                 using (var ctx = new MissingContext())
                 {
-                    grid.Inicializar();
-
-                    var query = ctx.Historials.Where(x => x.Id > 0);
-
-                    // Ordenamiento
-                    if (grid.columna == "Id")
+                    if (fechaInicial != null && fechaFinal != null)
                     {
-                        query = grid.columna_orden == "DESC" ? query.OrderByDescending(x => x.Id)
-                                                             : query.OrderBy(x => x.Id);
+                        listaHistorial = ctx.Historials
+                            .Where(x => x.Fecha >= fechaInicial && x.Fecha <= fechaFinal)
+                            .OrderBy(x => x.Fecha)
+                            .Skip((pagina - 1) * cantidadRegistrosPorPagina)
+                            .Take(cantidadRegistrosPorPagina).ToList();
+                        totalDeRegistros = ctx.Historials.Where(x => x.Fecha >= fechaInicial && x.Fecha <= fechaFinal).Count();
+                    }
+                    else
+                    {
+                        listaHistorial = ctx.Historials.OrderBy(x => x.Fecha)
+                        .Skip((pagina - 1) * cantidadRegistrosPorPagina)
+                        .Take(cantidadRegistrosPorPagina).ToList();
+                        totalDeRegistros = ctx.Historials.Count();
                     }
 
-                    if (grid.columna == "Fecha")
-                    {
-                        query = grid.columna_orden == "DESC" ? query.OrderByDescending(x => x.Fecha)
-                                                             : query.OrderBy(x => x.Fecha);
-                    }
 
-                    var historial = query.Skip(grid.pagina)
-                                       .Take(grid.limite)
-                                       .ToList();
+                    var modelo = new IndexViewModel();
+                    modelo.ListaHistorial = listaHistorial;
+                    modelo.PaginaActual = pagina;
+                    modelo.TotalDeRegistros = totalDeRegistros;
+                    modelo.RegistrosPorPagina = cantidadRegistrosPorPagina;
+                    modelo.ValoresQueryString = new RouteValueDictionary();
+                    //modelo.ValoresQueryString["edad"] = 5;
 
-                    var total = query.Count();
-
-                    grid.SetData(
-                        from h in historial
-                        select new
-                        {
-                            h.Id,
-                            h.Fecha,
-                            h.ListaOriginal,
-                            h.listaPerdidos,
-                            h.ListaResultado
-                        },
-                        total
-                    );
+                    return modelo;
                 }
             }
             catch (Exception E)
@@ -75,8 +75,24 @@ namespace Model.BussinesLogic
 
                 throw;
             }
+        }
 
-            return grid.responde();
+        public string Eliminar(Historial historial)
+        {
+            try
+            {
+                using (var ctx = new MissingContext())
+                {
+                    ctx.Entry(historial).State = EntityState.Deleted;
+                    ctx.SaveChanges();
+                    return "";
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

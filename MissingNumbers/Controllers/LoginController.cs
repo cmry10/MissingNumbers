@@ -6,13 +6,14 @@ using System.Web.Mvc;
 
 namespace MissingNumbers.Controllers
 {
-    [NoLogin]
+    
     public class LoginController : Controller
     {
         private Usuario usuario = new Usuario();
         private LogicaUsuario conLogicaUsuario = new LogicaUsuario();
         private LogicaTipoDocumento conLogicaTipoDocumento = new LogicaTipoDocumento();
 
+        [NoLogin]
         public ActionResult Index()
         {
             return View();
@@ -24,7 +25,7 @@ namespace MissingNumbers.Controllers
 
             if (rm.response)
             {
-                rm.href = Url.Content("~/historial/index");
+                rm.href = Url.Content("~/historial/CargarHistorial");
             }
 
             return Json(rm);

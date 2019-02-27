@@ -21,7 +21,7 @@ namespace Model
         public void Inicializar()
         {
             /* Cantidad de registros por página */
-            pagina = pagina - 10;
+            pagina = pagina - 1;
 
             /* Desde que número de fila va a paginar */
             if (pagina > 0) pagina = pagina * limite;

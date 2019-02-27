@@ -1,10 +1,8 @@
 namespace Model
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Historial")]
     public partial class Historial
@@ -24,6 +22,10 @@ namespace Model
         [Required]
         [StringLength(100)]
         public string listaPerdidos { get; set; }
+                
+        public string numerosIni { get; set; }
+        
+        public string numerosSec { get; set; }
 
         public int UsuarioId { get; set; }
 

@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Insertar Listas";
+}
+<h4>Insertar Listas</h4>
+@using (Html.BeginForm("ConsultarListas", "Listas", FormMethod.Get))
+{
+<div class="container">
+    <label>Lista Original</label>
+    <div>
+        <label for="txtCantidadNumerosInicial">Cantidad Numeros</label>
+        <input type="text" name="txtCantidadNumerosInicial" id="txtCantidadNumerosInicial" class="form-control" />
+        <label for="txtNumerosInicial">Numeros</label>
+        <input type="text" name="txtNumerosInicial" id="txtNumerosInicial" class="form-control" />
+    </div>
+    <label>Lista Faltantes</label>
+    <div>
+        <label for="txtCantidadNumerosSecundaria">Cantidad Numeros</label>
+        <input type="text" name="txtCantidadNumerosSecundaria" id="txtCantidadNumerosSecundaria" class="form-control" />
+        <label for="txtNumerosFaltantes">Numeros</label>
+        <input type="text" name="txtNumerosSecundaria" id="txtNumerosSecundaria" class="form-control" />
+    </div>
+    <div>
+        <label id="lbl-resultado"></label>
+        <label id="lbl-mensaje"></label>
+        <input type="button" id="btn-aceptar" value="Consultar" class="btn btn-success btn-sm form-control" />
+
+    </div>
+</div>
+
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn-aceptar').click(function () {
+            var _data = {
+                txtCantidadNumerosInicial: $("#txtCantidadNumerosInicial").val(),
+                txtNumerosInicial: $("#txtNumerosInicial").val(),
+                txtCantidadNumerosSecundaria: $("#txtCantidadNumerosSecundaria").val(),
+                txtNumerosSecundaria: $("#txtNumerosSecundaria").val()
+            }
+            
+            var _url = '@Url.Action("ConsultarListas", "Listas")';
+            $.getJSON(_url, _data)
+                .done(function (data) {
+                    if (data.success) {
+                        $("#lbl-resultado").text(data.result);
+                        $("#lbl-mensaje").text(data.message);
+                    }
+                })
+                .fail(function () { })
+                .always(function () { })
+        });
+    });
+</script>

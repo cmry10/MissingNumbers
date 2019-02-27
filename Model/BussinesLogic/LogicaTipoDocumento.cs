@@ -18,7 +18,7 @@ namespace Model.BussinesLogic
                                            .ToList();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

@@ -2,7 +2,9 @@
     Layout = null;
     string controlador = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
 
-    //Model.USUARIOS usuario = new Model.USUARIOS().Obtener(Helper.SessionHelper.GetUser());
+
+
+    Model.Usuario usuario = new Model.BussinesLogic.LogicaUsuario().Obtener(Helper.SessionHelper.GetUser());
 }
 <!DOCTYPE html>
 <html>
@@ -20,24 +22,13 @@
     @if (controlador != "login")
     {
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Seguros GAP</a>
+            <a class="navbar-brand" href="#">Prueba Missing Numbers</a>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="~/home/index">Clientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="~/poliza">Polizas</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @*<b>Hola</b>, @(usuario.TX_NOMBRE + " " + usuario.TX_APELLIDO) <span class="caret"></span>*@
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="~/login/logout">Finalizar Sesión</a>
-                        </div>
-                    </li>
-                </ul>
+                @if (usuario != null)
+                {
+                    <a class="navbar-brand" href="#">Hola , @(usuario.NombreUsuario)</a>
+                    <a class="navbar-brand" href="~/Login/Logout">Salir</a>
+                }
             </div>
         </nav>
     }
@@ -48,7 +39,7 @@
             </div>
         </div>
         <div class="well text-center">
-            2018 - Proyecto desarrollado por Felipeosouri.
+            2019 - Proyecto desarrollado por CarlosRY.
         </div>
     </div>
     <script src="~/assets/js/bootstrap.min.js"></script>

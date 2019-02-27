@@ -1,0 +1,61 @@
+﻿@model Model.Usuario
+@{
+    ViewBag.Title = (Model.Id > 0 ? Model.NombreUsuario : "Nuevo Usuario");
+
+    List<Model.TipoDocumento> listTiposDocumentos = ViewBag.TipoDocumento;
+}
+<h2 class="page-header">
+    Registro 
+</h2>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="~/login">Login</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Registro Usuario</li>
+    </ol>
+</nav>
+@using (Html.BeginForm("Guardar", "Usuario", FormMethod.Post, new { id = "frm-usuario" }))
+{
+    @*@Html.HiddenFor(x => x.Id)*@
+
+    <div class="form-row">
+        <div class="col">
+            @Html.LabelFor(x => x.NombreUsuario, "Nombre de Usuario")
+            @Html.TextBoxFor(x => x.NombreUsuario, new { @class = "form-control col-md-6" })
+            @Html.ValidationMessageFor(x => x.NombreUsuario, null, new { @class = "badge badge-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Email, "E-mail")
+        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Email, null, new { @class = "badge badge-danger" })
+    </div>
+    <div class="form-row">
+        <div class="col">
+            @Html.LabelFor(x => x.TipoDocumentoId, "Tipo de Documento")
+            <select name="TipoDocumentoId" class="form-control col-md-6">
+                @foreach (var td in listTiposDocumentos)
+                {
+                    <option @(Model.TipoDocumentoId == td.Id ? "selected" : "") value="@td.Id">@td.Descripcion</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(x => x.TipoDocumentoId, null, new { @class = "badge badge-danger" })
+        </div>
+        <div class="col">
+            @Html.LabelFor(x => x.Documento, "Documento")
+            @Html.TextBoxFor(x => x.Documento, new { @class = "form-control col-md-6" })
+            @Html.ValidationMessageFor(x => x.Documento, null, new { @class = "badge badge-danger" })
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            @Html.LabelFor(x => x.Contrasena, "Contraseña")
+            @Html.TextBoxFor(x => x.Contrasena, new { type = "password", @class = " form-control col-md-6" })
+            @Html.ValidationMessageFor(x => x.Contrasena, null, new { @class = "badge badge-danger" })
+        </div>
+    </div>
+
+    <div class="text-right">
+        <button data-ajax="true" type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+}
+
