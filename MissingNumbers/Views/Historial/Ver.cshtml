@@ -1,0 +1,22 @@
+﻿@model Model.Historial
+@{
+    ViewBag.Title = "Ver";
+}
+<h2 class="page-header">
+    Historial
+</h2>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="~/poliza">Usuarios</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Historial</li>
+    </ol>
+</nav>
+<div>
+    <div class="panel-heading">Información Personal</div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>Nombres</dt>
+            <dt>@Model.ListaOriginal</dt>
+        </dl>
+    </div>
+</div>

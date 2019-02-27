@@ -1,10 +1,12 @@
 ﻿using Helper;
+using MissingNumbers.Filters;
 using Model;
 using Model.BussinesLogic;
 using System.Web.Mvc;
 
 namespace MissingNumbers.Controllers
 {
+    [NoLogin]
     public class LoginController : Controller
     {
         private Usuario usuario = new Usuario();

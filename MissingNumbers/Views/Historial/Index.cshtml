@@ -1,0 +1,31 @@
+﻿@model List<Model.Historial>
+@{
+    ViewBag.Title = "Inicio";
+}
+<h2 class="page-header">
+    <a href="~/historial/crud" class="btn btn-success float-right">Crear nuevo Usuario</a>
+    Historial
+</h2>
+<table class="table table-bordered table-sm">
+    <thead>
+        <tr>
+            <th class="text-center" scope="col">Fecha</th>
+            <th class="text-center" scope="col">Resultado</th>
+            <th class="font-weight-light text-center">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var historial in Model)
+        {
+            <tr>
+                <th class="font-weight-light text-center">@(historial.Fecha)</th>
+                <th class="font-weight-light text-center">@(historial.ListaResultado)</th>
+                <th>
+                    <a class="btn btn-info btn-sm" href="~/historial/ver/@historial.Id">Ver</a>
+                    <a class="btn btn-primary btn-sm" href="~/usuario/crud/@historial.Id">Editar</a>
+                    <a onclick="return confirm('¿Desea eliminar este registro?');" class="btn btn-danger btn-sm" href="~/usuario/eliminar/@historial.Id">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
